@@ -192,6 +192,11 @@ def run_one_turn(state: LoopState) -> bool:
         max_tokens=8000,
     )
 
+    # 🔍 调试：打印模型返回的原始结构（看完成果可以删掉这 3 行）
+    print(f"\n\033[35m=== RAW RESPONSE (turn {state.turn_count}) ===\033[0m")
+    print(response.model_dump_json(indent=2))
+    print(f"\033[35m=== END ===\033[0m\n")
+
     # ② 把模型的回复追加到 messages（这就是"记忆"形成的瞬间）
     state.messages.append({"role": "assistant", "content": response.content})
 
